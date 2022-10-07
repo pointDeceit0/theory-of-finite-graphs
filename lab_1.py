@@ -17,20 +17,5 @@ def main():
     print(weight)
 
 
-def test():
-    with open('data.txt', 'r') as file:
-        gr = []
-        n = int(file.readline().strip())
-
-        while (inp := file.readline()) != 'q':
-            inp = inp.strip().split()
-            inp[2] = float(inp[2])
-            gr.append(inp)
-
-    print_graph(gr)
-    gr = max_subgraph(gr, n)
-    print_graph(gr)
-
-
 if __name__ == "__main__":
     main()
