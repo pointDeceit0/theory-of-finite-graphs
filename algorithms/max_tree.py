@@ -2,26 +2,38 @@ class DisconnectedGraph(Exception):
     pass
 
 
-def max_subgraph(graph: list[list[str, str, int]], n: int) -> list[tuple[str, str, float]]:
+def max_subgraph(graph: list[list[str, str, int]], n: int) -> tuple[list[tuple[str, str, float]], int]:
     "Prim's algorithm"
+    '''
+    m - number of edges
+    Time complexity  --- O(m)
+    '''
 
     e = sorted(graph, reverse=True, key=lambda x: x[2])
     
-    ans, bouquet = [], set()
-    for i, v in enumerate(e):
-        # check for a cycle
-        if not (v[0] in bouquet and v[1] in bouquet): 
-            for j in range(i + 1, len(e)):
-                if v[0] in e[j] or v[1] in e[j]:
-                    ans.append(tuple(v))
-                    break
-            else:
-                raise DisconnectedGraph
+    unselected = e[1::].copy()
+    ans, bouquet = [e[0]], {e[0][0], e[0][1]}
+    while len(unselected) or len(bouquet) != n:
+        for _, v in enumerate(unselected):
+            if v[0] in bouquet and v[1] in bouquet:
+                unselected.remove(v)
+                break
+            elif v[0] in bouquet or v[1] in bouquet:
+                ans.append(v)
+                bouquet.add(v[0])
+                bouquet.add(v[1])
+                unselected.remove(v)
+                break
+        else:
+            ans.append(unselected[0])
+            bouquet.add(unselected[0][0])
+            bouquet.add(unselected[0][1])
+            unselected.append(unselected[0])
+    
+    weight = sum([v[2] for _, v in enumerate(ans)])
+    
+    return (ans, weight)
 
-            bouquet.add(v[0])
-            bouquet.add(v[1])
-
-    return ans
 
 def main():
     n = int(input('Input number of vertexes: '))
