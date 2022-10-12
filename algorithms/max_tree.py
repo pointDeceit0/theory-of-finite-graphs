@@ -2,14 +2,14 @@ class DisconnectedGraph(Exception):
     pass
 
 
-def max_subgraph(graph: list[list[str, str, int]], n: int) -> tuple[list[tuple[str, str, float]], int]:
+def subgraph(graph: list[list[str, str, int]], n: int, reverse=False) -> tuple[list[tuple[str, str, float]], int]:
     "Prim's algorithm"
     '''
     m - number of edges
     Time complexity  --- O(m)
     '''
 
-    e = sorted(graph, reverse=True, key=lambda x: x[2])
+    e = sorted(graph, reverse=reverse, key=lambda x: x[2])
     
     unselected = e[1::].copy()
     ans, bouquet = [e[0]], {e[0][0], e[0][1]}
@@ -45,7 +45,7 @@ def main():
         inp[2] = float(inp[2])
         gr.append(inp)
 
-    print(max_subgraph(gr))
+    print(subgraph(gr))
 
 
 
