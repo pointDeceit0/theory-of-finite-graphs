@@ -7,6 +7,9 @@ def subgraph(graph: list[list[str, str, int]], n: int, reverse=False) -> tuple[l
     '''
     m - number of edges
     Time complexity  --- O(m)
+
+    reverse: False - standart min subgraph
+             True - max subgraph
     '''
 
     e = sorted(graph, reverse=reverse, key=lambda x: x[2])
