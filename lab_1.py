@@ -1,4 +1,4 @@
-from algorithms.max_tree import max_subgraph
+from algorithms.max_tree import subgraph
 from print_graph import print_graph
 
 
@@ -12,7 +12,7 @@ def main():
         gr.append(inp)
 
     print_graph(gr)
-    gr, weight = max_subgraph(gr, n)
+    gr, weight = subgraph(gr, n)
     print_graph(gr)
     print(weight)
 

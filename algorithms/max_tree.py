@@ -48,7 +48,7 @@ def main():
         inp[2] = float(inp[2])
         gr.append(inp)
 
-    print(subgraph(gr))
+    print(subgraph(gr, n))
 
 
 
