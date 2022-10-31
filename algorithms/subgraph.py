@@ -13,6 +13,7 @@ def subgraph(graph: list[list[str, str, int]], n: int, reverse=False) -> tuple[l
     '''
 
     e = sorted(graph, reverse=reverse, key=lambda x: x[2])
+    print(e)
     
     unselected = e[1::].copy()
     ans, bouquet = [e[0]], {e[0][0], e[0][1]}
@@ -39,7 +40,18 @@ def subgraph(graph: list[list[str, str, int]], n: int, reverse=False) -> tuple[l
 
 
 def main():
-    n = int(input('Input number of vertexes: '))
+    a = open('algorithms/gr.txt', 'r')
+
+    n = int(a.readline().strip())
+    gr = []
+    while (s := a.readline().strip()) != 'q':
+        s = s.split()
+        s[2] = float(s[2])
+        gr.append(s)
+
+    print(subgraph(gr, n))
+    
+    '''n = int(input('Input number of vertexes: '))
 
     
     gr = []
@@ -49,7 +61,7 @@ def main():
         gr.append(inp)
 
     print(subgraph(gr, n))
-
+'''
 
 
 if __name__ == "__main__":
