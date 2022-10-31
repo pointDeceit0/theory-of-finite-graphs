@@ -12,7 +12,7 @@ def subgraph(graph: list[list[str, str, int]], n: int, reverse=False) -> tuple[l
              True - max subgraph
     '''
 
-    e = sorted(graph, reverse=reverse, key=lambda x: x[2])
+    e = sorted(graph, reverse=reverse, key=lambda x: float(x[2:]))
     print(e)
     
     unselected = e[1::].copy()
